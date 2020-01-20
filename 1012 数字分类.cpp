@@ -1,61 +1,66 @@
 #include<cstdio>
+
 int main()
 {
-    int a1=0, a2=0, a3=0,a4=0,a5=0;
+	int count[5] = { 0 };
 
 
-	int arr[1000];
-	scanf("%d", &arr[0]);
-	int N=arr[0];
-	for (int i = 1; i <=N; i++)
-		scanf("%d", &arr[i]);
-	int k = 0;
-	for (int i = 1,j=0,max=0; i < N+1; i++)
+	int arr[5] = { 0 };
+	int n, temp;
+
+	scanf("%d", &n);
+
+	for (int i = 0; i < n; i++)
 	{
-		if (arr[i] % 5 == 0)
-        {
-            if(arr[i]%2==0)
-			a1 = a1 + arr[i];
-        }
-		else if (arr[i] % 5 == 1)
+		scanf("%d", &temp);
+		if (temp % 5 == 0)
 		{
-
-			j++;
-			if (j % 2 == 0)
-				a2 -= arr[i];
-			else
-				a2 += arr[i];
-
+			if (temp % 2 == 0)
+			{
+				arr[0] += temp;
+				count[0]++;
+			}
 		}
-		else if (arr[i] % 5 == 2)
-			a3++;
-		else if (arr[i] % 5 == 3)
+		else if (temp % 5 == 1)
 		{
-			//printf("%d*", arr[i]);
-			a4 += arr[i];
-			k++;
+
+
+			if (count[1] % 2 == 0)
+				arr[1] += temp;
+			else
+				arr[1] -= temp;
+			count[1]++;
+		}
+		else if (temp % 5 == 2)
+			count[2]++;
+		else if (temp % 5 == 3)
+		{
+
+			arr[3] += temp;
+			count[3]++;
 		}
 
 		else
 		{
-			if (max < arr[i])
+			if (temp>arr[4])
 			{
-				max = arr[i];
-				a5 = max;
+				arr[4] = temp;
+
 			}
+			count[4]++;
 		}
 
 	}
 
-	if (a1 == 0)printf("N ");
-	else printf("%d ", a1);
-	if (a2 == 0)printf("N ");
-	else printf("%d ", a2);
-	if (a3 == 0)printf("N ");
-	else printf("%d ", a3);
-	if (a4 == 0)printf("N ");
-	else printf("%.1f ", (double)a4/k);
-	if (a5 == 0)printf("N");
-	else printf("%d", a5);
+	if (count[0] == 0)printf("N ");
+	else printf("%d ", arr[0]);
+	if (count[1] == 0)printf("N ");
+	else printf("%d ", arr[1]);
+	if (count[2] == 0)printf("N ");
+	else printf("%d ", count[2]);
+	if (count[3] == 0)printf("N ");
+	else printf("%.1f ", (double)arr[3]/count[3]);
+	if (count[4] == 0)printf("N");
+	else printf("%d", arr[4]);
 	return 0;
 }
